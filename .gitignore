@@ -4,7 +4,15 @@ frontend/dist/
 
 # Local secrets
 **/.env
-!**/.env.example
+
+# Local runtime and build configuration (not published)
+backend/.env.example
+frontend/.env.example
+backend/package.json
+backend/package-lock.json
+frontend/package.json
+frontend/package-lock.json
+frontend/vite.config.js
 
 # Uploaded customer files (keep the directory itself in Git)
 backend/src/uploads/*
