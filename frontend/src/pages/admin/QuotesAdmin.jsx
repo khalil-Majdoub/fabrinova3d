@@ -1,0 +1,5 @@
+import { useEffect, useState } from "react";
+import AdminShell from "../../components/AdminShell.jsx";
+import api from "../../api/axios.js";
+const QuotesAdmin=()=>{const [items,setItems]=useState([]);useEffect(()=>{api.get("/quotes").then(({data})=>setItems(data)).catch(()=>{});},[]);return <AdminShell title="Quote requests" subtitle="Review incoming projects and update their progress"><div className="table-wrap"><table className="table"><thead><tr><th>Client</th><th>Project</th><th>Service</th><th>Files</th><th>Status</th></tr></thead><tbody>{items.length?items.map(x=><tr key={x._id}><td>{x.client?.prenom} {x.client?.nom}<br/><span className="muted">{x.client?.email}</span></td><td>{x.project?.description?.slice(0,45)}…</td><td>{x.project?.typeService}</td><td>{x.files?.length || 0}</td><td><span className="status">{x.status}</span></td></tr>):<tr><td colSpan="5" className="admin-empty">No quote requests received yet.</td></tr>}</tbody></table></div></AdminShell>};
+export default QuotesAdmin;

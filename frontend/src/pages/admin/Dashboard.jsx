@@ -1,0 +1,5 @@
+import { useEffect, useState } from "react";
+import AdminShell from "../../components/AdminShell.jsx";
+import api from "../../api/axios.js";
+const Dashboard = () => {const [counts,setCounts]=useState({products:"—",quotes:"—",messages:"—"});useEffect(()=>{Promise.all([api.get("/products"),api.get("/quotes"),api.get("/contact")]).then(([p,q,m])=>setCounts({products:p.data.length,quotes:q.data.length,messages:m.data.length})).catch(()=>{});},[]);return <AdminShell title="Manufacturing terminal" subtitle="Live overview of Fabrinova3D"><div className="admin-grid">{[["Active products",counts.products],["Pending quotes",counts.quotes],["Contact messages",counts.messages],["System status","Online"]].map(([label,value])=><div className="metric" key={label}><span>{label}</span><strong>{value}</strong></div>)}</div><section className="admin-panel" style={{marginTop:22}}><div className="eyebrow">Operations / next actions</div><h3 style={{fontSize:24}}>KEEP THE WORKFLOW MOVING.</h3><p className="muted">Review incoming quote requests, manage the catalog, and publish the latest workshop updates from the navigation.</p></section></AdminShell>};
+export default Dashboard;

@@ -1,0 +1,5 @@
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
+const links = [["/admin/dashboard","Overview"],["/admin/products","Products"],["/admin/services","Services"],["/admin/realisations","Projects"],["/admin/blog","Blog"],["/admin/quotes","Quote requests"],["/admin/messages","Messages"]];
+const AdminShell = ({ title, subtitle, children, action }) => { const { user, logout } = useAuth(); const navigate = useNavigate(); const signOut = () => { logout(); navigate("/admin/login"); }; return <div className="admin-shell"><aside className="admin-side"><h1>FABRINOVA3D<i>.</i></h1>{links.map(([to,label]) => <NavLink key={to} to={to}>{label}</NavLink>)}<a href="#signout" onClick={(e)=>{e.preventDefault();signOut();}}>Sign out</a></aside><main className="admin-main"><div className="admin-top"><p>SYS::FABRINOVA / ADMINISTRATION</p><p>{user?.name || "Administrator"}</p></div><div className="admin-content"><div className="admin-title"><div><h2>{title}</h2>{subtitle && <p>{subtitle}</p>}</div>{action}</div>{children}</div></main></div>; };
+export default AdminShell;

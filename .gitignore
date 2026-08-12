@@ -1,0 +1,11 @@
+# Dependencies and generated builds
+**/node_modules/
+frontend/dist/
+
+# Local secrets
+**/.env
+!**/.env.example
+
+# Uploaded customer files (keep the directory itself in Git)
+backend/src/uploads/*
+!backend/src/uploads/.gitkeep
